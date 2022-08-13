@@ -1,0 +1,83 @@
+.container {
+  padding: 0 2rem;
+}
+
+.body{
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.spacing{
+  margin-top: 20px;
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(../../public/image/Delivery.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+.btn {
+  margin-top: 1rem;
+  background-color: black;
+  display: inline-block;
+  padding: .8rem 3rem;
+  font-size: 1.7rem;
+  border-radius: .5rem;
+  border: .2rem solid var(--black);
+  color: var(--white);
+  cursor: pointer;
+  background-color: var(--black);
+  margin-top: 40px;
+}
+
+.btn:hover {
+  background: var(--orange);
+  color: #fff;
+}
+.home .content {
+  text-align: center;
+  width: 60rem;
+}
+
+.home .content h3 {
+  color: var(--white);
+  font-size: 4rem;
+  margin-top: 20px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 white, 0 -1px white
+}
+
+.home .content h3 span {
+  color: var(--orange);
+}
+
+.home .content p {
+  color: var(--light-color);
+  font-size: 1.7rem;
+  padding: 1rem 0;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+  .logo img {
+    filter: invert(1);
+  }
+}

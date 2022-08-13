@@ -1,0 +1,16 @@
+.body{
+    margin-top: 7%;
+    margin-bottom: 7%;
+  }
+  .hei1{
+    margin-bottom: 40px;
+  }
+  .spacing{
+
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      width: 80%;
+      margin-left: 3px;
+
+  }
