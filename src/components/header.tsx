@@ -1,16 +1,19 @@
 import Style from '../styles/Header.module.css'
-
+import Link from 'next/link'
 export default function Header(){
     return(
         <>
 <div className={Style.header}>
   
-  <a href="#default" className="logo"><h1>FOODGS</h1></a>
+  <Link href="/" className="logo">
+    <a><h1>FOODGS</h1>
+      </a>
+    </Link>
   <div className={Style.header_right}>
-    <a className="active" href="#home">Home</a>
+   {/* <Link href="/home" className="active"> <a>Home</a></Link> */}
     
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <Link href="/administration_couriers"><a>Couriers</a></Link>
+    <Link href="/administration_res"><a>Restaurants</a></Link>
   </div>
 </div>
 </>)
