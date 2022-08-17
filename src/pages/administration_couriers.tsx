@@ -68,7 +68,7 @@ console.log(couriers)
 }
 
 export async function getServerSideProps(){
-    const res = await axios.get(`http://192.168.0.106:8090/couriers`);
+    const res = await axios.get(`http://localhost:8090/couriers`);
       return { 
         props: {
           couriers: res.data

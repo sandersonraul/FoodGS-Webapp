@@ -1,8 +1,9 @@
-import Axios  from 'axios';
+import axios  from 'axios';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import style from '../styles/Crud.module.css'
 
+const Route_Restaurant_Id = "restaurants/[id]";
 type Restaurant ={
   id:number,
   name:string,
@@ -18,7 +19,6 @@ type administration_restaurantsProps = {
 
 
 const Administration_restaurants: NextPage<administration_restaurantsProps> = ({ restaurants }: administration_restaurantsProps ) => {
-
     return (
         <>
 
@@ -63,7 +63,8 @@ const Administration_restaurants: NextPage<administration_restaurantsProps> = ({
           <td>{restaurant.email}</td>
           <td>{restaurant.created_at}</td>
           <td>{restaurant.updated_at}</td>
-          <td><Link href={''}>edit/</Link>
+          <td><Link href={{pathname: Route_Restaurant_Id,
+          query: {id:restaurant.id}}}>edit/</Link>
           <Link href={''}> remove</Link></td>
           </tr>
       ))}
@@ -76,7 +77,7 @@ const Administration_restaurants: NextPage<administration_restaurantsProps> = ({
     )
 }
 export async function getServerSideProps(){
-  const res = await Axios.get(`http://192.168.0.106:8090/restaurants`);
+  const res = await axios.get(`http://localhost:8090/restaurants`);
     return { 
       props: {
         restaurants: res.data

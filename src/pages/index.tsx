@@ -20,7 +20,7 @@ const Home = () =>{
   const submitRestaurant = async (e: { preventDefault: () => void; }) =>{
   e.preventDefault();
   try{
-  const response = await Axios.post('http://192.168.0.106:8090/restaurants',
+  const response = await Axios.post('http://localhost:8090/restaurants',
   {
       name:name, 
       email:email,
