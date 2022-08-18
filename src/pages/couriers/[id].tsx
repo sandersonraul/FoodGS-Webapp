@@ -1,22 +1,33 @@
 import axios from 'axios';
 import { useRouter } from 'next/router'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from '../../styles/Resform.module.css'
-export default function Updateres() {
+const baseURL = "https://jsonplaceholder.typicode.com/posts";
+
+export default function UpdateCourier() {
+    // const [courier, setCourier] = useState(null);
+    // useEffect(() => {
+    //     axios.get(`${baseURL}/1`).then((response) => {
+    //         setCourier(response.data)
+    //     })
+    // })
     const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [cnpj, setCnpj] = useState('');
-    const submitRestaurant = async (e: { preventDefault: () => void; }) => {
+    const [password, setPassword] = useState('');
+    const [cpf, setCPF] = useState('');
+    const submitCourier = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+        console.log("Teste")
         try {
-            const response = await axios.put(`http://localhost:8090/restaurants/${router.query.id}`,
+            const response = await axios.put(`${baseURL}}/${router.query.id}`,
                 {
                     name: name,
                     email: email,
-                    cnpj: cnpj
+                    password: password,
+                    cpf: cpf
                 });
-            console.log("teste:", response.data)
+            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -29,7 +40,7 @@ export default function Updateres() {
                 <div className="container">
                     <div className=" text-center mt-5 ">
 
-                        <h1 className={style.hei1}>Want to join us? Register you restaurant!</h1>
+                        <h1 className={style.hei1}>Want to join us? Register you Courier!</h1>
 
 
                     </div>
@@ -39,7 +50,7 @@ export default function Updateres() {
                                 <div className="card-body bg-light">
 
                                     <div className="container">
-                                        <form id="contact-form" role="form" onSubmit={submitRestaurant}>
+                                        <form id="contact-form" role="form" onSubmit={ submitCourier}>
                                             <div className="controls">
                                                 <div className="col">
                                                     <div className="form-group">
@@ -56,6 +67,20 @@ export default function Updateres() {
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-group">
+                                                        <label htmlFor="password">Password *</label>
+                                                        <input
+                                                            id="password"
+                                                            type="pasword"
+                                                            name="password"
+                                                            className="form-control"
+                                                            placeholder="Please enter your password"
+                                                            onChange={(e) => setPassword(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col">
+                                                    <div className="form-group">
                                                         <label htmlFor="email">Email *</label>
                                                         <input
                                                             id="email"
@@ -70,14 +95,14 @@ export default function Updateres() {
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-group">
-                                                        <label htmlFor="cnpj">Cnpj *</label>
+                                                        <label htmlFor="cpf">cpf *</label>
                                                         <input
-                                                            id="cnpj"
+                                                            id="cpf"
                                                             type="text"
-                                                            name="cnpj"
+                                                            name="cpf"
                                                             className="form-control"
-                                                            placeholder="Please enter your cnpj *"
-                                                            onChange={(e) => setCnpj(e.target.value)}
+                                                            placeholder="Please enter your cpf *"
+                                                            onChange={(e) => setCPF(e.target.value)}
                                                         />
 
                                                     </div>

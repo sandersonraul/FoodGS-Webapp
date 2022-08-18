@@ -2,7 +2,7 @@ import style from '../styles/Crud.module.css'
 import axios from 'axios'
 import Link from 'next/link'
 import { NextPage } from 'next';
-
+const Route_Courier_Id = "couriers/[id]";
 type Courier ={
     id:number,
     name:string,
@@ -53,7 +53,8 @@ console.log(couriers)
           <td>{courier.email}</td>
           <td>{courier.created_at}</td>
           <td>{courier.updated_at}</td>
-          <td><Link href={''}>edit/</Link>
+          <td><Link href={{pathname: Route_Courier_Id,
+          query: {id:courier.id}}}>edit/</Link>
           <Link href={''}> remove</Link></td>
           </tr>
       ))}

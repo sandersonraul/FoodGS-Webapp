@@ -13,7 +13,7 @@ export default function Create_co(){
     const submitcourier = async (e: { preventDefault: () => void; }) =>{
     e.preventDefault();
     try{
-    const response = await axios.post('http://192.168.0.106:8090/couriers',
+    const response = await axios.post('http://localhost:8090/couriers',
     {
         name:name, 
         email:email,
@@ -116,7 +116,7 @@ return (
                     </div>
                     <div className="col-md-12">
                        
-                     <input type="submit" className="btn btn-success btn-send  pt-2 btn-block" value="Teu toba">
+                     <input type="submit" className="btn btn-success btn-send  pt-2 btn-block" value="Submit">
                      </input>
                     
                 </div>

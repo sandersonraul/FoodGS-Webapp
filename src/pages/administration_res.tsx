@@ -9,6 +9,7 @@ type Restaurant ={
   name:string,
   cnpj:string,
   email:string,
+  active: boolean,
   created_at:any,
   updated_at:any
 }
@@ -19,7 +20,13 @@ type administration_restaurantsProps = {
 
 
 const Administration_restaurants: NextPage<administration_restaurantsProps> = ({ restaurants }: administration_restaurantsProps ) => {
-    return (
+  const deleteComent = async (restaurant_id: any ) =>{
+    try{
+    const response = axios.delete(`http://localhost:8090/restaurants/${restaurant_id}`)
+  }catch(error){
+    console.log(error)
+  }}
+  return (
         <>
 
         <ul className="nav nav-pills nav-fill justify-content-center">
@@ -57,15 +64,16 @@ const Administration_restaurants: NextPage<administration_restaurantsProps> = ({
   </thead>
   <tbody className='table-group-divider'>
     {restaurants.map((restaurant) => (
+      
         <tr key={restaurant.id}>
           <td>{restaurant.name}</td>
           <td>{restaurant.cnpj}</td>
           <td>{restaurant.email}</td>
           <td>{restaurant.created_at}</td>
           <td>{restaurant.updated_at}</td>
-          <td><Link href={{pathname: Route_Restaurant_Id,
-          query: {id:restaurant.id}}}>edit/</Link>
-          <Link href={''}> remove</Link></td>
+          <td><button><Link href={{pathname: Route_Restaurant_Id,
+          query: {id:restaurant.id}}}>edit/</Link></button>
+          <button onClick={()=>deleteComent(restaurant.id)}> remove</button></td>
           </tr>
       ))}
 
@@ -76,8 +84,14 @@ const Administration_restaurants: NextPage<administration_restaurantsProps> = ({
         </>
     )
 }
+
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI0NTY0MjJjMC05ZGRhLTQ1ZjAtODU0YS1iODY0M2IwMTYwMGIiLCJleHAiOjE2NjA4NDMzOTJ9.oIcXUuJ9QlmxzXdNiSDkY0enQQGx4mgpgsdjm0hRm1I"
 export async function getServerSideProps(){
-  const res = await axios.get(`http://localhost:8090/restaurants`);
+  const res = await axios.get(`http://localhost:8090/restaurants`,
+  {headers:{
+    "x-access-token": token
+  }
+  });
     return { 
       props: {
         restaurants: res.data
