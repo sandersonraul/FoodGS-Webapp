@@ -1,12 +1,10 @@
-import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
+
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import api from "../services/api";
-import { useContext, useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
 import style from '../styles/Resform.module.css'
 import Axios from 'axios'
+import Router from 'next/router'
 
 
 
@@ -14,7 +12,6 @@ const Home = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [cnpj, setCnpj] = useState('');
   const submitRestaurant = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -23,14 +20,13 @@ const Home = () => {
         {
           name: name,
           email: email,
-          password: password,
           cnpj: cnpj
         });
       console.log(response.data)
     } catch (error) {
       console.log(error)
     }
-
+    Router.push('/administration_res')
   }
   return (
     <>
@@ -53,24 +49,27 @@ const Home = () => {
                 It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                 It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
                 and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </p>
+              </p>
             </div>
             <div className="col">
-              <img src='/image/teamwork_and_team_building.png'></img>
+              <Image src={'/image/teamwork_and_team_building.png'} width={"80%"} height={"60%"} layout="responsive"></Image>
             </div>
           </div>
           <h1 className={styles.spacing}>How does it work?</h1>
           <div className='row row-cols1 row-cols-md3 g-4'>
             <div className='col'>
-              <img src='/image/Food.png' width="80%" height="80%"></img>
+              <Image src={'/image/Food.png'}  width={"80%"} height={"80%"} layout="responsive"></Image>
+
               <p className='text-center'>The restaurant put the order</p>
             </div>
-            <div className='col'>
-              <img src='/image/courier.png' width="80%" height="80%"></img>
+            <div className='col'>             
+            <Image src={'/image/courier.png'} layout="responsive" width={"80%"} height={"80%"}></Image>
+
               <p className='text-center'>We let available a service to a restaurant user, to inform us what order they want to deliver</p>
             </div>
             <div className='col'>
-              <img src='/image/cliente.png' width="80%" height="80%" />
+            <Image src={'/image/cliente.png'} layout="responsive" width={"80%"} height={"80%"}></Image>
+
               <p className='text-center'>And we deliver to the restaurant client the order</p>
             </div>
           </div>
@@ -104,22 +103,12 @@ const Home = () => {
                               name="name"
                               className="form-control"
                               placeholder="Please enter your name *"
+                              required
+                              minLength={5}
+                              maxLength={50}
                               onChange={(e) => setName(e.target.value)}
                             />
 
-                          </div>
-                        </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label htmlFor="password">Password *</label>
-                            <input
-                              id="password"
-                              type="pasword"
-                              name="password"
-                              className="form-control"
-                              placeholder="Please enter your password"
-                              onChange={(e) => setPassword(e.target.value)}
-                            />
                           </div>
                         </div>
 
@@ -131,6 +120,9 @@ const Home = () => {
                               type="email"
                               name="email"
                               className="form-control"
+                              required
+                              minLength={5}
+                              maxLength={50}
                               placeholder="Please enter your email *"
                               onChange={(e) => setEmail(e.target.value)}
                             />
@@ -144,6 +136,9 @@ const Home = () => {
                               id="cnpj"
                               type="text"
                               name="cnpj"
+                              required
+                              minLength={5}
+                              maxLength={50}
                               className="form-control"
                               placeholder="Please enter your cnpj *"
                               onChange={(e) => setCnpj(e.target.value)}
@@ -155,8 +150,12 @@ const Home = () => {
 
                         <div className="col-md-12">
 
-                          <input type="submit" className="btn btn-success btn-send  pt-2 btn-block" value="Register">
-                          </input>
+
+                          <button type="submit" className="btn btn-success btn-send  pt-2 btn-block">
+                            Register
+                          </button>
+
+
                         </div>
                       </div>
                     </form>
@@ -186,19 +185,6 @@ const Home = () => {
                             margin-right: 10px;
                         }
                      `}</style>
-      {/* <ul>{results.map((result: { id: any; name: any; })=>{
-      const {id, name} = result;
-      return (
-        <li key={id} className="card">
-          <a href=''>
-          <h1>{name}</h1>
-          </a>
-
-        </li>
-      )
-     })}
-      <li></li>
-     </ul>  */}
     </>
   )
 

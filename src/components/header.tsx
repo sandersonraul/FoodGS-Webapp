@@ -14,6 +14,7 @@ export default function Header(){
     
     <Link href="/administration_couriers"><a>Couriers</a></Link>
     <Link href="/administration_res"><a>Restaurants</a></Link>
+    <Link href="/administration_deliveries"><a>Deliveries</a></Link>
   </div>
 </div>
 </>)

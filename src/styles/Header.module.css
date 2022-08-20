@@ -26,9 +26,8 @@
   /* Change the background color on mouse-over */
   
   /* Style the active/current link*/
-  .header a.active {
-    background-color: dodgerblue;
-    color: white;
+  .header a:hover{
+    color: bisque;
   }
   
   /* Float the link section to the right */

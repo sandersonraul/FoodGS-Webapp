@@ -1,0 +1,11 @@
+.color{
+    padding-bottom: 1px;
+}
+.color a{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;
+    color: black;
+}
+.color a:hover{
+    color: chocolate;
+}

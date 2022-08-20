@@ -1,36 +1,25 @@
 import axios from 'axios';
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react';
+import Router, { useRouter } from 'next/router'
+import { useState } from 'react';
 import style from '../../styles/Resform.module.css'
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
-
-export default function UpdateCourier() {
-    // const [courier, setCourier] = useState(null);
-    // useEffect(() => {
-    //     axios.get(`${baseURL}/1`).then((response) => {
-    //         setCourier(response.data)
-    //     })
-    // })
+export default function UpdateCouriers() {
     const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [cpf, setCPF] = useState('');
+    const [cpf, setCpf] = useState('');
     const submitCourier = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        console.log("Teste")
         try {
-            const response = await axios.put(`${baseURL}}/${router.query.id}`,
+            const response = await axios.put(`http://localhost:8090/couriers/${router.query.id}`,
                 {
                     name: name,
                     email: email,
-                    password: password,
                     cpf: cpf
                 });
-            console.log(response.data)
+            console.log("teste:", response.data)
         } catch (error) {
             console.log(error)
-        }
+        } Router.push('/administration_couriers')
 
     }
     return (
@@ -40,7 +29,7 @@ export default function UpdateCourier() {
                 <div className="container">
                     <div className=" text-center mt-5 ">
 
-                        <h1 className={style.hei1}>Want to join us? Register you Courier!</h1>
+                        <h1 className={style.hei1}>Want to join us? Register you restaurant!</h1>
 
 
                     </div>
@@ -50,7 +39,7 @@ export default function UpdateCourier() {
                                 <div className="card-body bg-light">
 
                                     <div className="container">
-                                        <form id="contact-form" role="form" onSubmit={ submitCourier}>
+                                        <form id="contact-form" role="form" onSubmit={submitCourier}>
                                             <div className="controls">
                                                 <div className="col">
                                                     <div className="form-group">
@@ -67,20 +56,6 @@ export default function UpdateCourier() {
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-group">
-                                                        <label htmlFor="password">Password *</label>
-                                                        <input
-                                                            id="password"
-                                                            type="pasword"
-                                                            name="password"
-                                                            className="form-control"
-                                                            placeholder="Please enter your password"
-                                                            onChange={(e) => setPassword(e.target.value)}
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col">
-                                                    <div className="form-group">
                                                         <label htmlFor="email">Email *</label>
                                                         <input
                                                             id="email"
@@ -95,14 +70,14 @@ export default function UpdateCourier() {
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-group">
-                                                        <label htmlFor="cpf">cpf *</label>
+                                                        <label htmlFor="cpf">Cpf *</label>
                                                         <input
                                                             id="cpf"
                                                             type="text"
                                                             name="cpf"
                                                             className="form-control"
                                                             placeholder="Please enter your cpf *"
-                                                            onChange={(e) => setCPF(e.target.value)}
+                                                            onChange={(e) => setCpf(e.target.value)}
                                                         />
 
                                                     </div>

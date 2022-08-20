@@ -1,42 +1,40 @@
-import axios from 'axios';
-import Router from 'next/router';
-import { useState } from 'react';
-import Navbar from '../components/navbar';
+import axios from 'axios'
+import Router  from 'next/router'
+import { useState } from 'react'
 import style from '../styles/Resform.module.css'
-import toast from "../components/Toast";
-export default function Resform() {
-    /* set and attributes of the endpoint*/
+import Navbar from '../components/navbar'
+
+export default function Courier_form() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [cnpj, setCnpj] = useState('');
-    const submitRestaurant = async (e: { preventDefault: () => void; }) => {
+    const [password, setPassword] = useState('');
+    const [cpf, setCpf] = useState('');
+    const submitcourier = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        /* post restaurant */
         try {
-            const response = await axios.post('http://localhost:8090/restaurants',
+            const response = await axios.post('http://localhost:8090/couriers',
                 {
                     name: name,
                     email: email,
-                    cnpj: cnpj
-                }); 
-                
-            console.log(response.data.token)
-           
+                    password: password,
+                    cpf: cpf
+                });
+            console.log(response.data)
         } catch (error) {
             console.log(error)
-        }
-        /* send to the adm restaurants route */
-        Router.push('/administration_res')
-    }
+        } Router.push('/administration_couriers')
+
+    } 
     return (
         <>
-            <Navbar />
+
+            <Navbar/>
             <div className={style.body}>
 
                 <div className="container">
                     <div className=" text-center mt-5 ">
 
-                        <h1 className={style.hei1}>Restaurant Form</h1>
+                        <h1 className={style.hei1}>Courier Form</h1>
 
 
                     </div>
@@ -48,70 +46,87 @@ export default function Resform() {
                                 <div className="card-body bg-light">
 
                                     <div className="container">
-                                        <form id="contact-form" role="form" onSubmit={submitRestaurant}>
+                                        <form id="contact-form" onSubmit={submitcourier} role="form">
+
+
+
                                             <div className="controls">
                                                 <div className="col">
                                                     <div className="form-group">
                                                         <label htmlFor="name">Name *</label>
-                                                        <input id="name"
+                                                        <input
+                                                            id="name"
                                                             type="text"
                                                             name="name"
+                                                            required
+                                                            minLength={4}
+                                                            maxLength={50}
                                                             className="form-control"
                                                             placeholder="Please enter your name *"
-                                                            required
-                                                            minLength={5}
-                                                            maxLength={50}
                                                             onChange={(e) => setName(e.target.value)}
                                                         />
 
                                                     </div>
                                                 </div>
-
                                                 <div className="col">
                                                     <div className="form-group">
                                                         <label htmlFor="email">Email *</label>
                                                         <input
                                                             id="email"
-                                                            type="email"
+                                                            type="text"
                                                             name="email"
+                                                            required
+                                                            minLength={6}
+                                                            maxLength={50}
                                                             className="form-control"
+                                                            placeholder="Please enter your email"
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="col">
+                                                    <div className="form-group">
+                                                        <label htmlFor="password">Password *</label>
+                                                        <input
+                                                            id="password"
+                                                            type="password"
+                                                            name="password"
                                                             required
                                                             minLength={5}
                                                             maxLength={50}
-                                                            placeholder="Please enter your email *"
-                                                            onChange={(e) => setEmail(e.target.value)}
-                                                        />
+                                                            className="form-control"
+                                                            placeholder="Please enter your password *"
+                                                            onChange={(e) => setPassword(e.target.value)} />
 
                                                     </div>
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-group">
-                                                        <label htmlFor="cnpj">Cnpj *</label>
+                                                        <label htmlFor="Cpf">Cpf *</label>
                                                         <input
-                                                            id="cnpj"
+                                                            id="Cpf"
                                                             type="text"
-                                                            name="cnpj"
+                                                            name="Cpf"
                                                             required
                                                             minLength={5}
                                                             maxLength={50}
                                                             className="form-control"
-                                                            placeholder="Please enter your cnpj *"
-                                                            onChange={(e) => setCnpj(e.target.value)}
+                                                            placeholder="Please enter your Cpf*"
+                                                            onChange={(e) => setCpf(e.target.value)}
                                                         />
 
                                                     </div>
                                                 </div>
-
-
                                                 <div className="col-md-12">
 
-
-                                                    <button type="submit" className="btn btn-success btn-send  pt-2 btn-block">
-                                                        Register
-                                                    </button>
-
+                                                    <input type="submit" className="btn btn-success btn-send  pt-2 btn-block" value="Register">
+                                                    </input>
 
                                                 </div>
+
+
+
                                             </div>
                                         </form>
                                     </div>
@@ -127,7 +142,6 @@ export default function Resform() {
                     </div>
                 </div>
             </div>
-            {/* style for a button */}
             <style jsx>{`.btn-send{
                         font-weight: 300;
                         text-transform: uppercase;
@@ -141,7 +155,6 @@ export default function Resform() {
                             margin-right: 10px;
                         }
                      `}</style>
-
         </>
     )
 }

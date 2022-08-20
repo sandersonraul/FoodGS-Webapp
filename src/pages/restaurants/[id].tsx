@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useState } from 'react';
 import style from '../../styles/Resform.module.css'
 export default function Updateres() {
@@ -19,7 +19,7 @@ export default function Updateres() {
             console.log("teste:", response.data)
         } catch (error) {
             console.log(error)
-        }
+        } Router.push('/administration_res')
 
     }
     return (
