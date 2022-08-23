@@ -1,9 +1,11 @@
 import axios from 'axios';
 import Router from 'next/router';
-import { useState } from 'react';
+import { useState} from 'react';
 import Navbar from '../components/navbar';
 import style from '../styles/Resform.module.css'
-import toast from "../components/Toast";
+
+
+
 export default function Resform() {
     /* set and attributes of the endpoint*/
     const [name, setName] = useState('');
@@ -11,23 +13,30 @@ export default function Resform() {
     const [cnpj, setCnpj] = useState('');
     const submitRestaurant = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        /* post restaurant */
+
         try {
             const response = await axios.post('http://localhost:8090/restaurants',
                 {
                     name: name,
                     email: email,
                     cnpj: cnpj
-                }); 
-                
-            console.log(response.data.token)
-           
+
+                }
+            
+            )
+            
+            
+
+
+
         } catch (error) {
             console.log(error)
-        }
+        }Router.push('/administration_res')
+
         /* send to the adm restaurants route */
-        Router.push('/administration_res')
+
     }
+
     return (
         <>
             <Navbar />
@@ -110,10 +119,11 @@ export default function Resform() {
                                                         Register
                                                     </button>
 
-
+                                                
                                                 </div>
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
 

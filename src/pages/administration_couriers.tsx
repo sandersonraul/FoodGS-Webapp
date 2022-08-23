@@ -3,6 +3,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { NextPage } from 'next';
 import Navbar from '../components/navbar';
+import router from 'next/router';
 
 const Route_Courier_Id = "couriers/[id]";
 type Courier = {
@@ -24,7 +25,7 @@ const Administration_couriers: NextPage<administration_couriersProps> = ({ couri
       const response = axios.delete(`http://localhost:8090/couriers/${courier_id}`)
     } catch (error) {
       console.log(error)
-    }
+    } router.push("/administration_res")
   }
 
   return (

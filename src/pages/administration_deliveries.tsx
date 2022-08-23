@@ -3,6 +3,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { NextPage } from 'next';
 import Navbar from '../components/navbar';
+import router from 'next/router';
 
 const Route_Delivery_Id = "deliveries/[id]";
 type Delivery = {
@@ -21,7 +22,7 @@ const Administration_deliveries: NextPage<administration_deliveriesProps> = ({ d
             const response = axios.delete(`http://localhost:8090/deliveries/${delivery_id}`)
         } catch (error) {
             console.log(error)
-        }
+        } router.push("/administration_res")
     }
 
     return (

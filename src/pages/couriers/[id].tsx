@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Router, { useRouter } from 'next/router'
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import toast from "../../components/Toast"
 import style from '../../styles/Resform.module.css'
 export default function UpdateCouriers() {
     const router = useRouter();
@@ -16,12 +17,12 @@ export default function UpdateCouriers() {
                     email: email,
                     cpf: cpf
                 });
-            console.log("teste:", response.data)
         } catch (error) {
             console.log(error)
         } Router.push('/administration_couriers')
 
     }
+    
     return (
         <>
             <div className={style.body}>

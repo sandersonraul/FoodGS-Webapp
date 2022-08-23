@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import style from '../styles/Crud.module.css'
 import Navbar from '../components/navbar';
+import router from 'next/router'
 /* Type of the endpoint */
 type Restaurant = {
   id: number,
@@ -22,13 +23,12 @@ type administration_restaurantsProps = {
 
 const Administration_restaurants: NextPage<administration_restaurantsProps> = ({ restaurants }: administration_restaurantsProps) => {
   /* Delete function */
-  
   const deleteRestaurant = async (restaurant_id: any) => {
     try {
       const response = axios.delete(`http://localhost:8090/restaurants/${restaurant_id}`)
     } catch (error) {
       console.log(error)
-    }
+    } router.push("/administration_res")
   }
   return (
 
