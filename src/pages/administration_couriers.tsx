@@ -25,7 +25,7 @@ const Administration_couriers: NextPage<administration_couriersProps> = ({ couri
       const response = axios.delete(`http://localhost:8090/couriers/${courier_id}`)
     } catch (error) {
       console.log(error)
-    } router.push("/administration_res")
+    } router.push("/administration_couriers")
   }
 
   return (
