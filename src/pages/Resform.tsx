@@ -26,7 +26,7 @@ export default function Resform() {
             )
             
             
-
+                console.log(response.data[1])
 
 
         } catch (error) {
@@ -50,7 +50,7 @@ export default function Resform() {
 
                     </div>
 
-
+{/*  Forms to restaurants */}
                     <div className="row ">
                         <div className="col-lg-7 mx-auto">
                             <div className="card mt-2 mx-auto p-4 bg-light">

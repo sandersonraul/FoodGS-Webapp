@@ -19,13 +19,19 @@ type administration_restaurantsProps = {
   restaurants: Restaurant[];
 };
 
-
+//your token
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI2MWVhYTRiOS1jYzdiLTQ5MTUtYmQ5OC00MDJiZTEzYjU4NDgiLCJleHAiOjE2NjEyOTk5OTB9.XLxYlnRb-AQ73pAdjDj90zNWoDc6wrJHP7Q8eeqZ8mU"
 
 const Administration_restaurants: NextPage<administration_restaurantsProps> = ({ restaurants }: administration_restaurantsProps) => {
   /* Delete function */
   const deleteRestaurant = async (restaurant_id: any) => {
     try {
-      const response = axios.delete(`http://localhost:8090/restaurants/${restaurant_id}`)
+      const response = axios.delete(`http://localhost:8090/restaurants/${restaurant_id}`,
+      {
+        headers: {
+          "x-access-token": token
+        }
+      })
     } catch (error) {
       console.log(error)
     } router.push("/administration_res")
@@ -92,8 +98,7 @@ const Administration_restaurants: NextPage<administration_restaurantsProps> = ({
     </>
   )
 }
-// your token
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI2MWVhYTRiOS1jYzdiLTQ5MTUtYmQ5OC00MDJiZTEzYjU4NDgiLCJleHAiOjE2NjEyOTk5OTB9.XLxYlnRb-AQ73pAdjDj90zNWoDc6wrJHP7Q8eeqZ8mU"
+//async function to get restaurants
 export async function getServerSideProps() {
   const res = await axios.get(`http://localhost:8090/restaurants`,
     {
