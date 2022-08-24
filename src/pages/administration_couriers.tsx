@@ -78,13 +78,22 @@ const Administration_couriers: NextPage<administration_couriersProps> = ({ couri
     </>
   )
 }
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI2MWVhYTRiOS1jYzdiLTQ5MTUtYmQ5OC00MDJiZTEzYjU4NDgiLCJleHAiOjE2NjEyOTk5OTB9.XLxYlnRb-AQ73pAdjDj90zNWoDc6wrJHP7Q8eeqZ8mU"
 
 export async function getServerSideProps() {
-  const res = await axios.get(`http://localhost:8090/couriers`);
+    
+  const res = await axios.get(`http://localhost:8090/couriers`,
+  
+  {
+      headers: {
+        "x-access-token": token
+      }
+    });
+  
   return {
-    props: {
-      couriers: res.data
-    }
+      props: {
+          couriers: res.data
+      }
   };
 }
 

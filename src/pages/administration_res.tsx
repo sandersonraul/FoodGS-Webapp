@@ -93,7 +93,7 @@ const Administration_restaurants: NextPage<administration_restaurantsProps> = ({
   )
 }
 // your token
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI5ZWJjZTZlNC01MTgxLTRjMTktODZjOS1jZmU3MDMyYzgzODciLCJleHAiOjE2NjEwMTQ0ODB9.IyYTeOFsSHSbCKk_Y1Hki1vYzJ8CTpNS7-jaJcFsdFU"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI2MWVhYTRiOS1jYzdiLTQ5MTUtYmQ5OC00MDJiZTEzYjU4NDgiLCJleHAiOjE2NjEyOTk5OTB9.XLxYlnRb-AQ73pAdjDj90zNWoDc6wrJHP7Q8eeqZ8mU"
 export async function getServerSideProps() {
   const res = await axios.get(`http://localhost:8090/restaurants`,
     {
