@@ -21,11 +21,15 @@ const Home = () => {
           name: name,
           email: email,
           cnpj: cnpj
-        });
-      console.log(response.data)
-    } catch (error) {
+        }
+      )
+      //console log to token
+      console.log(response.data[1])
+    }
+    catch (error) {
       console.log(error)
     }
+
     Router.push('/administration_res')
   }
   return (
@@ -58,17 +62,17 @@ const Home = () => {
           <h1 className={styles.spacing}>How does it work?</h1>
           <div className='row row-cols1 row-cols-md3 g-4'>
             <div className='col'>
-              <Image src={'/image/Food.png'}  width={"80%"} height={"80%"} layout="responsive"></Image>
+              <Image src={'/image/Food.png'} width={"80%"} height={"80%"} layout="responsive"></Image>
 
               <p className='text-center'>The restaurant put the order</p>
             </div>
-            <div className='col'>             
-            <Image src={'/image/courier.png'} layout="responsive" width={"80%"} height={"80%"}></Image>
+            <div className='col'>
+              <Image src={'/image/courier.png'} layout="responsive" width={"80%"} height={"80%"}></Image>
 
               <p className='text-center'>We let available a service to a restaurant user, to inform us what order they want to deliver</p>
             </div>
             <div className='col'>
-            <Image src={'/image/cliente.png'} layout="responsive" width={"80%"} height={"80%"}></Image>
+              <Image src={'/image/cliente.png'} layout="responsive" width={"80%"} height={"80%"}></Image>
 
               <p className='text-center'>And we deliver to the restaurant client the order</p>
             </div>
