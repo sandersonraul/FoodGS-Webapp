@@ -4,7 +4,7 @@ import { useState } from 'react'
 import style from '../styles/Resform.module.css'
 import Navbar from '../components/navbar'
 
-export default function Create_co() {
+export default function Courier_form() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,7 +38,7 @@ export default function Create_co() {
 
 
                     </div>
-{/* Forms to couriers */}
+
 
                     <div className="row ">
                         <div className="col-lg-7 mx-auto">
@@ -70,16 +70,16 @@ export default function Create_co() {
                                                 </div>
                                                 <div className="col">
                                                     <div className="form-group">
-                                                        <label htmlFor="Email">Email *</label>
+                                                        <label htmlFor="email">Email *</label>
                                                         <input
-                                                            id="Email"
+                                                            id="email"
                                                             type="text"
-                                                            name="Email"
+                                                            name="email"
                                                             required
                                                             minLength={6}
                                                             maxLength={50}
                                                             className="form-control"
-                                                            placeholder="Please enter your Email"
+                                                            placeholder="Please enter your email"
                                                             onChange={(e) => setEmail(e.target.value)}
                                                         />
                                                     </div>
@@ -87,11 +87,11 @@ export default function Create_co() {
 
                                                 <div className="col">
                                                     <div className="form-group">
-                                                        <label htmlFor="Password">Password *</label>
+                                                        <label htmlFor="password">Password *</label>
                                                         <input
-                                                            id="Password"
+                                                            id="password"
                                                             type="password"
-                                                            name="Password"
+                                                            name="password"
                                                             required
                                                             minLength={5}
                                                             maxLength={50}

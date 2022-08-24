@@ -1,87 +1,116 @@
-import Axios  from 'axios';
+import axios from 'axios';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import style from '../styles/Crud.module.css'
-
-type Restaurant ={
-  id:number,
-  name:string,
-  cnpj:string,
-  email:string,
-  created_at:any,
-  updated_at:any
+import Navbar from '../components/navbar';
+import router from 'next/router'
+/* Type of the endpoint */
+type Restaurant = {
+  id: number,
+  name: string,
+  cnpj: string,
+  email: string,
+  active: boolean,
+  created_at: any,
+  updated_at: any
 }
+/* Props to the page */
 type administration_restaurantsProps = {
   restaurants: Restaurant[];
 };
 
+//your token
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI2MWVhYTRiOS1jYzdiLTQ5MTUtYmQ5OC00MDJiZTEzYjU4NDgiLCJleHAiOjE2NjEyOTk5OTB9.XLxYlnRb-AQ73pAdjDj90zNWoDc6wrJHP7Q8eeqZ8mU"
+
+const Administration_restaurants: NextPage<administration_restaurantsProps> = ({ restaurants }: administration_restaurantsProps) => {
+  /* Delete function */
+  const deleteRestaurant = async (restaurant_id: any) => {
+    try {
+      const response = axios.delete(`http://localhost:8090/restaurants/${restaurant_id}`,
+      {
+        headers: {
+          "x-access-token": token
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    } router.push("/administration_res")
+  }
+  return (
+
+    <>
+    {/* HTML */}
+
+      <Navbar />
+
+      <ul>
 
 
-const Administration_restaurants: NextPage<administration_restaurantsProps> = ({ restaurants }: administration_restaurantsProps ) => {
-
-    return (
-        <>
-
-        <ul className="nav nav-pills nav-fill justify-content-center">
-  <li className="nav-item">
-  <Link href="/administration_res"><a className="nav-link" >Administration of restaurants</a></Link>
-  </li>
-  <li className="nav-item">
-  <Link href="/administration_couriers"><a className="nav-link" >Administration of couriers</a></Link>
-  </li>
-</ul>
-
-<ul>
-
-{/* {restaurants.map((restaurant) =>(
-          <PizzaCard key={pizza.id} pizza={pizza} />
-        ))} */}
-
-
-</ul>
-        <div className={style.body}>
+      </ul>
+      <div className={style.body}>
         <div className="container-sm">
-          <h1>Restaurant administration ok?</h1>
-        <table className="table table-responsive">
-        
-  <thead className='table-dark'>
+          <h1 className='text-center'>Restaurant administration</h1>
+          <table className="table table-responsive">
 
-    <tr>
-      <th scope="col">name</th>
-      <th scope="col">cpnj</th>
-      <th scope="col">email</th>
-      <th scope="col">created_at</th>
-      <th scope="col">updated_at</th>
-      <th scope='col'>...</th>
-    </tr>
-  </thead>
-  <tbody className='table-group-divider'>
-    {restaurants.map((restaurant) => (
-        <tr key={restaurant.id}>
-          <td>{restaurant.name}</td>
-          <td>{restaurant.cnpj}</td>
-          <td>{restaurant.email}</td>
-          <td>{restaurant.created_at}</td>
-          <td>{restaurant.updated_at}</td>
-          <td><Link href={''}>edit/</Link>
-          <Link href={''}> remove</Link></td>
-          </tr>
-      ))}
+            <thead className='table-dark'>
 
-  </tbody>
-</table>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">cpnj</th>
+                <th scope="col">email</th>
+                <th scope="col">created_at</th>
+                <th scope="col">updated_at</th>
+                <th scope='col'>...</th>
+              </tr>
+            </thead>
+            <tbody className='table-group-divider'>
+              {restaurants.sort((a,b) => a.id - b.id).map((restaurant) => (
+/* If to determine if the table is active or not
+  And map function to map the whole table
+*/
+                <tr key={restaurant.id}>
+                  {restaurant.active === true && <>
+                    <td>{restaurant.name}</td>
+                    <td>{restaurant.cnpj}</td>
+                    <td>{restaurant.email}</td>
+                    <td>{restaurant.created_at}</td>
+                    <td>{restaurant.updated_at}</td>
+                    <td>
+                      {/* Query to pass the id to the dynamic page */}
+                      <Link href={{
+                      pathname: "restaurants/[id]",
+                      query: { id: restaurant.id }
+                    }}><button >
+                          Edit
+                    </button></Link>
+                      <button style={{marginLeft:"10px"}} onClick={() => deleteRestaurant(restaurant.id)}> remove</button>
+                    </td>
+                  </>}
+                </tr>
+              ))}
+
+            </tbody>
+          </table>
+          <Link href={"Resform"}>
+            <a className="btn btn-primary" role="button">Create Restaurant</a></Link>
         </div>
-        </div>
-        </>
-    )
+      </div>
+    </>
+  )
 }
-export async function getServerSideProps(){
-  const res = await Axios.get(`http://192.168.0.106:8090/restaurants`);
-    return { 
-      props: {
-        restaurants: res.data
+//async function to get restaurants
+export async function getServerSideProps() {
+  const res = await axios.get(`http://localhost:8090/restaurants`,
+    {
+      headers: {
+        "x-access-token": token
       }
-    };
+    });
+  return {
+    props: {
+      restaurants: res.data
+    }
+  };
 }
 
 export default Administration_restaurants
